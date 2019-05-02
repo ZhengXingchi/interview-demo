@@ -1,6 +1,11 @@
 ## THANKYOU
 如果帮助到您，请star以给作者以鼓励，谢谢!!!
 
+
+
+
+
+
 ## JavaScript实现继承的方式
 参考[JavaScript实现继承的方式](https://juejin.im/post/59e09676f265da430629cad2)
 [JavaScript六种继承方式详解](http://caibaojian.com/6-javascript-prototype.html)
@@ -263,6 +268,49 @@ L=FooL.__proto__.__proto__.__proto__=Function.prototype.__proto__.__proto__=Obje
 // 第三次判断
 L==null//根据instanceof机制返回false 
 ```
+
+
+## bind的javascript原生实现
+参考[JavaScript深入之bind的模拟实现](https://juejin.im/post/59093b1fa0bb9f006517b906)
+1.第一步返回函数颚模拟实现
+```
+Function.prototype.bind2=function(context){
+      var self=this;
+      return function(){
+        self.apply(context)
+      }
+}
+```
+
+2.传参数的实现
+```js
+Function.prototype.bind2=function(context){
+    var self=this;
+    var args=Array.prototype.slice.call(arguments,1);
+    return function(){
+        self.apply(context,args.concat(Array.prototype.slice.call(arguments)))
+    }
+}
+```
+3.构造函数的模拟实现（构造函数的this指向构造函数生成的实例）
+```
+Function.prototype.bind2=function(context){
+  var self=this;
+  var args=Array.prototype.slice.call(arguments,1)
+  var fbound=function(){
+    // 当作为构造函数时，this 指向实例，self 指向绑定函数，因为下面一句 `fbound.prototype = this.prototype;`，已经修改了 fbound.prototype 为 绑定函数的 prototype，此时结果为 true，当结果为 true 的时候，this 指向实例。
+    // 当作为普通函数时，this 指向 window，self 指向绑定函数，此时结果为 false，当结果为 false 的时候，this 指向绑定的 context。
+    var _this=this instanceof self?this:context
+    self.apply(_this,args.concat(Array.prototype.slice.call(arguments)))
+  }
+  // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承函数的原型中的值
+  fbound.prototype=Object.create(this.prototype)
+  fbound.prototype.constructor=fbound
+  return fbound
+}
+
+```
+
 
 
 
