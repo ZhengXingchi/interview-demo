@@ -1,3 +1,6 @@
+## THANKYOU
+如果帮助到您，请star以给作者以鼓励，谢谢!!!
+
 ## JavaScript实现继承的方式
 参考[JavaScript实现继承的方式](https://juejin.im/post/59e09676f265da430629cad2)
 [JavaScript六种继承方式详解](http://caibaojian.com/6-javascript-prototype.html)
@@ -200,9 +203,66 @@ ES5的继承，实质是先创造子类的实例对象this，然后再将父类�
 
 
 ## instanceof用法
-首先需要了解原型链的姿势
+参考[JavaScript instanceof 运算符深入剖析](https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/index.html)
+1. 首先需要了解原型链的姿势
 ![原型链](./img/prototype.png "原型链")
 
+2. 其次了解instanceof的运行机制
+```
+function instance_of(L, R) {//L 表示左表达式，R 表示右表达式
+ var O = R.prototype;// 取 R 的显示原型
+ L = L.__proto__;// 取 L 的隐式原型
+ while (true) { 
+   if (L === null) 
+     return false; 
+   if (O === L)// 这里重点：当 O 严格等于 L 时，返回 true 
+     return true; 
+   L = L.__proto__; 
+ } 
+}
+
+```
+
+3. 测验题
+Function instanceof Function
+```
+L=FunctionL.__proto__=Function.prototype
+O=FunctionR.prototype=Function.prototype
+// 第一次判断
+O == L 
+// 返回 true
+```
+
+Object instanceof Object
+```
+L=ObjectL.__proto__=Function.prototype
+O=ObjectR.prototype=Object.prototype
+
+// 第一次判断
+O !== L 
+
+// 进行第二次判断
+L=ObjectL.__proto__.__proto__=Function.prototype.__proto__=Object.prototype
+// 返回 true
+```
+
+Foo instanceof Foo
+```
+L=FooL.__proto__=Function.prototype
+O=FooR.prototype=Foo.prototype
+// 第一次判断
+O !== L 
+
+// 进行第二次判断
+L=FooL.__proto__.__proto__=Function.prototype.__proto__=Object.prototype
+// 第二次判断
+O !== L 
+
+// 进行第三次判断
+L=FooL.__proto__.__proto__.__proto__=Function.prototype.__proto__.__proto__=Object.prototype.__proto__=null
+// 第三次判断
+L==null//根据instanceof机制返回false 
+```
 
 
 
