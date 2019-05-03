@@ -312,5 +312,37 @@ Function.prototype.bind2=function(context){
 ```
 
 
+## react diff算法
+参考[React diff原理探究以及应用实践](https://juejin.im/post/5cb5b4926fb9a068b52fb823)
+[浅谈React中的diff](https://juejin.im/post/5ac355576fb9a028cc616aad)
+1. tree diff
+
+React只会对相同层级的 DOM 节点进行比较，即同一个父节点下的所有子节点。当发现节点已经不存在时，则该节点及其子节点会被完全删除掉，不会用于进一步的比较。这样只需要对树进行一次遍历，便能完成整个 DOM 树的比较。
+
+
+
+策略一的前提是Web UI中DOM节点跨层级的移动操作特别少，但并没有否定DOM节点跨层级的操作的存在，那么当遇到这种操作时，React是如何处理的呢？
+
+![tree_diff](./img/tree_diff.png "tree_diff")
+当出现节点跨层级移动时，并不会出现想象中的移动操作，而是以 A 为根节点的整个树被重新创建。这是一种影响React性能的操作，因此官方建议不要进行 DOM 节点跨层级的操作。
+
+>在开发组件时，保持稳定的 DOM 结构会有助于性能的提升。例如，可以通过 CSS 隐藏或显示节点，而不是真正地移 除或添加 DOM 节点。
+
+2. component diff
+- 如果是同一类型的组件，按照原策略继续比较 Virtual DOM 树即可。
+- 如果不是，则将该组件判断为 dirty component，从而替换整个组件下的所有子节点。
+- 对于同一类型的组件，有可能其 Virtual DOM 没有任何变化，如果能够确切知道这点，那么就可以节省大量的 diff 运算时间。因此，React允许用户通过shouldComponentUpdate()来判断该组件是否需要进行diff算法分析，但是如果调用了forceUpdate方法，shouldComponentUpdate则失效。
+
+ 
+![component_diff](./img/component_diff.png "component_diff")
+当组件D变为组件G时，即使这两个组件结构相似，一旦React判断D和G是不同类型的组件，就不会比较二 者的结构，而是直接删除组件D，重新创建组件G及其子节点。虽然当两个组件是不同类型但结构相似时，diff会影响性能，但正如React官方博客所言:不同类型的组件很少存在相似DOM树的情况，因此这种极端因素很难在实际开发过程中造成重大的影响。
+
+
+3. element diff
+
+
+ 
+
+
 
 
