@@ -2,8 +2,8 @@
 如果帮助到您，请star以给作者以鼓励，谢谢!!!
 
 
-
-
+[YanceyOfficial/interview](https://github.com/YanceyOfficial/interview)
+[xwchris/blog](https://github.com/xwchris/blog)
 
 
 ## JavaScript实现继承的方式
@@ -364,13 +364,51 @@ React只会对相同层级的 DOM 节点进行比较，即同一个父节点下�
 - maxIndex：在新集合访问过的节点中，其在老集合的最大下标值。
 
 操作：
-- 当oldIndex>maxIndex时，将oldIndex的值赋值给maxIndex
-- 当oldIndex=maxIndex时，不操作
-- 当oldIndex<maxIndex时，将当前节点移动到index的位置
+- 当`oldIndex>maxIndex`时，将oldIndex的值赋值给maxIndex
+- 当`oldIndex=maxIndex`时，不操作
+- 当`oldIndex<maxIndex`时，将当前节点移动到index的位置
 
 
 3.2 新集合中有新加入的节点且旧集合存在 需要删除的节点
 ![element_diff_add](./img/element_diff_add.png "element_diff_add")
+
+步骤1:新元素index=0  节点B   节点在原先排列中的oldIndex=1  初始maxIndex=0
+结果1:将oldIndex赋值于maxIndex=>maxIndex=1
+
+步骤2:新元素index=1  节点E   节点在原先排列中的oldIndex=null  初始maxIndex=1
+结果2:将新增节点E移动E到index=1的位置
+
+步骤3:新元素index=2  节点C   节点在原先排列中的oldIndex=2  初始maxIndex=1
+结果3:将oldIndex赋值于maxIndex=>maxIndex=2
+
+步骤4:新元素index=3  节点A   节点在原先排列中的oldIndex=0  初始maxIndex=2
+结果4:将当前节点移动A到index=3的位置
+
+步骤5:还需要对旧集合进行循环遍历，找出新集合中没有的节点，此时发现存在这样的节点D，因此删除节点D，到此 diff 操作全部完成。
+
+操作：
+- oldIndex存在
+  1. 当`oldIndex>maxIndex`时，将oldIndex的值赋值给maxIndex
+  2. 当`oldIndex=maxIndex`时，不操作
+  3. 当`oldIndex<maxIndex`时，将当前节点移动到index的位置
+
+- oldIndex不存在
+  1. 新增当前节点至index的位置
+
+
+## 前端性能优化
+参考[前端性能优化总结](https://juejin.im/post/5c37055f6fb9a049b07d8d1a)
+
+
+## http系列
+[HTTP----HTTP缓存机制](https://juejin.im/post/5a1d4e546fb9a0450f21af23)
+[http缓存机制及其原理](https://juejin.im/post/5cc596fbf265da03b2043a11)
+
+[[HTTP 系列] 第 1 篇 —— 从 TCP/UDP 到 DNS 解析](https://juejin.im/post/5cc5421e5188252e761e7e12)
+
+
+
+ 
 
 
  
