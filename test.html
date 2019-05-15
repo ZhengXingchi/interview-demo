@@ -6,36 +6,7 @@
 </head>
 <body>
 	<script>
-	function Animal(age) {
-  this.age = age;
-  this.name = 'animal';
-  this.type = ['pig', 'cat'];
-}
 
-Animal.prototype.greet = function(sound) {
-  console.log(sound);
-}
-
-function Dog(age) {
-  Animal.apply(this, arguments);
-  this.name = 'dog';
-}
-
-
-
-/* 注意下面两行 */
-Dog.prototype = Object.create(Animal.prototype);
- 
-
-Dog.prototype.getName = function() {
-  console.log(this.name);
-}
-
-var dog = new Dog(18);   
-var dog2 = new Dog(20);     
-
-dog.type.push('dog');   
- console.log(Dog.prototype.constructor)
-	</script>
+ </script>
 </body>
 </html>

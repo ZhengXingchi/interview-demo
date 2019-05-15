@@ -1,9 +1,11 @@
 ## THANKYOU
 如果帮助到您，请star以给作者以鼓励，谢谢!!!
 
-
+**参考博客**
 [YanceyOfficial/interview](https://github.com/YanceyOfficial/interview)
 [xwchris/blog](https://github.com/xwchris/blog)
+[冴羽的博客](https://github.com/mqyqingfeng/Blog)
+
 
 
 ## JavaScript实现继承的方式
