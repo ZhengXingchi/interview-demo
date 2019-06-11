@@ -458,3 +458,18 @@ display:inline-block并且在父节点设置font-size：0；然后在子节点�
 
 4. 对象存储OSS
 
+
+
+
+
+## 小牛哥整装家装
+1. react的mixin  HOC HOOK
+
+[React中使用swiper的具体方法](https://www.jianshu.com/p/341b48019ad7)
+[useState源码浅析](https://juejin.im/post/5c8f4b54f265da61103b3cae)
+[你要的 React 面试知识点，都在这了](https://juejin.im/post/5cf0733de51d4510803ce34e)
+
+[react 16.7 hook概述](https://www.jianshu.com/p/e61faf452565)
+[TIL/front-end/react/hooks/intro.md](https://github.com/xiaohesong/TIL/blob/master/front-end/react/hooks/intro.md)
+
+
