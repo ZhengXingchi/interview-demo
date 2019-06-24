@@ -473,3 +473,53 @@ display:inline-block并且在父节点设置font-size：0；然后在子节点�
 [TIL/front-end/react/hooks/intro.md](https://github.com/xiaohesong/TIL/blob/master/front-end/react/hooks/intro.md)
 
 
+2. 受控表单和非受控表单
+参考[Controlled and uncontrolled form inputs in React don't have to be complicated](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/)
+[表单](http://caibaojian.com/react/forms.html)
+非受控表单
+```
+class Form extends Component {
+  handleSubmitClick = () => {
+    const name = this._name.value;
+    // do something with `name`
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" ref={input => this._name = input} />
+        <button onClick={this.handleSubmitClick}>Sign up</button>
+      </div>
+    );
+  }
+}
+```
+
+受控表单
+```
+class Form extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+    };
+  }
+
+  handleNameChange = (event) => {
+    this.setState({ name: event.target.value });
+  };
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          value={this.state.name}
+          onChange={this.handleNameChange}
+        />
+      </div>
+    );
+  }
+}
+```
+
