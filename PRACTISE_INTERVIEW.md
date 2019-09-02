@@ -139,6 +139,8 @@ export default WebsocketHeartbeatJs;
 
 
 ## 依图医疗
+[依图面试经历（三面已过）](https://blog.csdn.net/zrj97/article/details/75020811)
+[依图面试经历](https://www.jianshu.com/p/2fcefd78834a)
 1. 防抖实现
 ```
 function debounce(fn,delay){
